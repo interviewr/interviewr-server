@@ -13,4 +13,5 @@ docker-image-build:
 
 docker-image-publish:
 	@ echo "---> Publishing Docker image ..."
+	@ docker push ok2ju/interviewr-server:develop
 .PHONY: docker-image-publish
