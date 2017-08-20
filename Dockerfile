@@ -1,7 +1,8 @@
 FROM golang:alpine
 MAINTAINER Alexey Vakulich "soulSpringg@gmail.com"
 
-ENV SRC_DIR=/go/interviewr
+# no need to redefine $GOPATH
+ENV SRC_DIR=/go/src/interviewr/interviewr-server
 
 ADD . $SRC_DIR
 WORKDIR $SRC_DIR
