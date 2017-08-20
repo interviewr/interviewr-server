@@ -1,5 +1,5 @@
-FROM golang:alphine
-MANTAINER Alexey Vakulich "soulSpringg@gmail.com"
+FROM golang:alpine
+MAINTAINER Alexey Vakulich "soulSpringg@gmail.com"
 
 ENV SRC_DIR=/app
 
