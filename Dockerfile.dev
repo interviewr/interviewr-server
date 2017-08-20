@@ -1,7 +1,7 @@
 FROM golang:alpine
 MAINTAINER Alexey Vakulich "soulSpringg@gmail.com"
 
-ENV SRC_DIR=/app
+ENV SRC_DIR=/go/src/interviewr/interviewr-server
 
 WORKDIR $SRC_DIR
 
