@@ -1,9 +1,8 @@
-FROM golang:alpine
-MAINTAINER Alexey Vakulich "soulSpringg@gmail.com"
+FROM golang:alphine
+MANTAINER Alexey Vakulich "soulSpringg@gmail.com"
 
-ENV SRC_DIR=/go/interviewr
+ENV SRC_DIR=/app
 
-ADD . $SRC_DIR
 WORKDIR $SRC_DIR
 
 RUN apk add --update --no-cache git
