@@ -7,7 +7,7 @@ WORKDIR $SRC_DIR
 
 RUN apk add --update --no-cache git
 RUN mkdir -p /bin
-RUN go get ./src/cmd
+RUN go get github.com/gorilla/mux
 RUN go build -o ./bin/entry ./src/cmd
 
 CMD ["./bin/entry"]
