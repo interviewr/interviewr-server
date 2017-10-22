@@ -33,7 +33,7 @@ func (r getOrganizationResponse) error() error {
 func makePostOrganizationEndpoint(s Service) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (response interface{}, err error) {
 		req := request.(postOrganizationRequest)
-		org, e := s.PostOrganization(ctx, req.Organization)
+		e := s.PostOrganization(ctx, req.Organization)
 		return postOrganizationResponse{Err: e}, nil
 	}
 }

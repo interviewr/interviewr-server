@@ -35,9 +35,9 @@ func MakeHTTPHundler(s Service, logger log.Logger) http.Handler {
 	return r
 }
 
-func decodePostOrganizationRequest(_ context.Content, r *http.Request) (request interface{}, err error) {
+func decodePostOrganizationRequest(_ context.Context, r *http.Request) (request interface{}, err error) {
 	var req postOrganizationRequest
-	if e := json.NewDecoder(r.Body).Decode(&req.Profile); e != nil {
+	if e := json.NewDecoder(r.Body).Decode(&req.Organization); e != nil {
 		return nil, e
 	}
 
@@ -68,7 +68,7 @@ type errorer interface {
 	error() error
 }
 
-func encodeError(_ context.Content, err error, w http.ResponseWriter) {
+func encodeError(_ context.Context, err error, w http.ResponseWriter) {
 	if err == nil {
 		panic("encodeError with nil error")
 	}

@@ -14,7 +14,7 @@ import (
 
 func main() {
 	var (
-		httpAddr = flag.String("http.addr", ":8080", "HTTP listen address")
+		httpAddr = flag.String("http.addr", ":8090", "HTTP listen address")
 	)
 
 	flag.Parse()
@@ -28,8 +28,8 @@ func main() {
 
 	var s organization.Service
 	{
-		s.organization.NewInmemService()
-		s.organization.LoggingMiddleware(logger)(s)
+		s = organization.NewInmemService()
+		s = organization.LoggingMiddleware(logger)(s)
 	}
 
 	var h http.Handler
@@ -37,7 +37,7 @@ func main() {
 		h = organization.MakeHTTPHundler(s, log.With(logger, "component", "HTTP"))
 	}
 
-	err := make(chan error)
+	errs := make(chan error)
 	go func() {
 		c := make(chan os.Signal)
 		signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)

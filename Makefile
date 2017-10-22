@@ -8,7 +8,7 @@ WORKDIR := $(PWD)
 docker-image-build:
 	@ echo "---> Building Docker image ..."
 	@ docker build -t interviewr-server .
-	@ docker run -it -p 8090:8090 -d  --rm --name interviewr-server interviewr-server
+	@ docker run -it -p 8090:8090 -d --rm --name interviewr-server interviewr-server
 .PHONY: docker-image-build
 
 docker-image-publish:

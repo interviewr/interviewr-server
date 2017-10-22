@@ -19,9 +19,6 @@ type Organization struct {
 type Service interface {
 	GetOrganization(ctx context.Context, id string) (Organization, error)
 	PostOrganization(ctx context.Context, org Organization) error
-	PutOrganization(ctx context.Context, id string, org Organization) error
-	PatchOrganization(ctx context.Context, id string, org Organization) error
-	DeleteOrganization(ctx, context.Context, id string) error
 }
 
 var (
