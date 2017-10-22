@@ -9,7 +9,7 @@ type postOrganizationRequest struct {
 	Organization Organization
 }
 
-type postOrganizationResponse strunc {
+type postOrganizationResponse struct {
 	Err error `json:"error,omitempty"`
 }
 
