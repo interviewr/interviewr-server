@@ -4,12 +4,14 @@ import (
 	"flag"
 	"fmt"
 	"net/http"
+	"github.com/gorilla/mux"
 	"os"
 	"os/signal"
 	"syscall"
 
-	"github.com/go-kit/kit/log"
-	"github.com/interviewr/interviewr-server/organization"
+	"github.com/interviewr/interviewr-server/repository/postgres"
+	"github.com/interviewr/interviewr-server/usecases"
+	"github.com/interviewr/interviewr-server/transport/http"
 )
 
 func main() {
@@ -19,23 +21,11 @@ func main() {
 
 	flag.Parse()
 
-	var logger log.Logger
-	{
-		logger = log.NewLogfmtLogger(os.Stderr)
-		logger = log.With(logger, "ts", log.DefaultTimestampUTC)
-		logger = log.With(logger, "caller", log.DefaultCaller)
-	}
+	r := mux.NewRouter()
 
-	var s organization.Service
-	{
-		s = organization.NewInmemService()
-		s = organization.LoggingMiddleware(logger)(s)
-	}
-
-	var h http.Handler
-	{
-		h = organization.MakeHTTPHundler(s, log.With(logger, "component", "HTTP"))
-	}
+	orgRepo := NewOrganizationRepository(/* pass DB connection here */)
+	orgUsecase := NewOrganizationUsecase(orgRepo)
+	NewOrganizationHttpHandler(r) // TODO: not sure about passing r into HttpHandler func
 
 	errs := make(chan error)
 	go func() {
@@ -46,7 +36,7 @@ func main() {
 
 	go func() {
 		logger.Log("transport", "HTTP", "addr", *httpAddr)
-		errs <- http.ListenAndServe(*httpAddr, h)
+		errs <- http.ListenAndServe(*httpAddr, r)
 	}()
 
 	logger.Log("exit", <-errs)
