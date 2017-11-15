@@ -1,7 +1,6 @@
 package http
 
 import (
-	"strconv"
 	"encoding/json"
 	"net/http"
 	"github.com/gorilla/mux"
@@ -32,13 +31,9 @@ func (h *HttpOrganizationHandler) Fetch(w http.ResponseWriter, r *http.Request) 
 	respondWithJSON(w, http.StatusOK, orgs)
 }
 
-func (h *HttpOrganizationHandler) Store(w http.ResponseWriter, r *http.Request) error {
-
-}
-
 func (h *HttpOrganizationHandler) GetById(w http.ResponseWriter, r *http.Request) error {
 	vars := mux.Vars(r)
-	id, err := strconv.Atoi(vars["id"])
+	id, err := vars["id"]
 	if err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid organization ID")
 		return
@@ -49,6 +44,10 @@ func (h *HttpOrganizationHandler) GetById(w http.ResponseWriter, r *http.Request
 		respondWithError(w, http.StatusNotFound, "Organization not found")
 	}
 	respondWithJSON(w, http.StatusOK, org)
+}
+
+func (h *HttpOrganizationHandler) Store(w http.ResponseWriter, r *http.Request) error {
+
 }
 
 func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
