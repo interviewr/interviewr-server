@@ -6,22 +6,22 @@ import (
 )
 
 type OrganizationUsecase interface {
-	Fetch() ([]*Organization, error)
-	GetById(id string) (*Organization, error)
-	Update(org *Organization) (*Organization, error)
-	Store(org *Organization) (string, error)
+	Fetch() ([]*domain.Organization, error)
+	GetById(id string) (*domain.Organization, error)
+	Update(org *domain.Organization) (*domain.Organization, error)
+	Store(org *domain.Organization) (string, error)
 	Delete(id string) (bool, error)
 }
 
 type organizationUsecase struct {
-	orgRepository OrganizationRepository
+	orgRepository repository.OrganizationRepository
 }
 
-func NewOrganizationUsecase(repo OrganizationRepository) OrganizationUsecase {
+func NewOrganizationUsecase(repo repository.OrganizationRepository) OrganizationUsecase {
 	return &organizationUsecase{repo}
 }
 
-func (uc *organizationUsecase) Fetch() ([]*Organization, error) {
+func (uc *organizationUsecase) Fetch() ([]*domain.Organization, error) {
 	orgs, err := uc.orgRepository.Fetch()
 	if err != nil {
 		return nil, err
@@ -29,13 +29,21 @@ func (uc *organizationUsecase) Fetch() ([]*Organization, error) {
 	return orgs, nil
 }
 
-func (uc *organizationUsecase) GetById(id string) (*Organization, error) {
-	return uc.orgRepository.GetById(id)
+func (uc *organizationUsecase) GetById(id string) (*domain.Organization, error) {
+	org, err := uc.orgRepository.GetById(id)
+	if err != nil {
+		return nil, err
+	}
+	return org, nil
 }
 
-func (uc *organizationUsecase) Update(org *Organization) (*Organization, error) {}
+func (uc *organizationUsecase) Update(org *domain.Organization) (*domain.Organization, error) {
+	return nil, nil
+}
 
-func (uc *organizationUsecase) Store(org *Organization) (string, error) {}
+func (uc *organizationUsecase) Store(org *domain.Organization) (string, error) {
+	return "nil", nil
+}
 
 func (uc *organizationUsecase) Delete(id string) (bool, error) {
 	// Validation logic here (check if item by given id exists)

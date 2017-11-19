@@ -2,14 +2,14 @@ package repository
 
 import (
 	"errors"
-	"github.com/interviewr/interviewr-server/domain"
+	domain "github.com/interviewr/interviewr-server/domain"
 )
 
 type OrganizationRepository interface {
-	Fetch() ([]*Organization, error)
-	GetById(id string) (*Organization, error)
-	Update(org *Organization) (*Organization, error)
-	Store(org *Organization) (string, error)
+	Fetch() ([]*domain.Organization, error)
+	GetById(id string) (*domain.Organization, error)
+	Update(org *domain.Organization) (*domain.Organization, error)
+	Store(org *domain.Organization) (string, error)
 	Delete(id string) (bool, error)
 }
 

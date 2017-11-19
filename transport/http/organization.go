@@ -4,15 +4,14 @@ import (
 	"encoding/json"
 	"net/http"
 	"github.com/gorilla/mux"
-	"github.com/interviewr/interviewr-server/domain"
 	"github.com/interviewr/interviewr-server/usecases"
 )
 
 type HttpOrganizationHandler struct {
-	OrganizationUsecase OrganizationUsecase
+	OrganizationUsecase usecases.OrganizationUsecase
 }
 
-func NewOrganizationHttpHandler(router *mux.Router, usecase OrganizationUsecase) {
+func NewOrganizationHttpHandler(router *mux.Router, usecase usecases.OrganizationUsecase) {
 	handler := &HttpOrganizationHandler{
 		OrganizationUsecase: usecase,
 	}
@@ -22,8 +21,8 @@ func NewOrganizationHttpHandler(router *mux.Router, usecase OrganizationUsecase)
 	router.HandleFunc("/orgs/{id}", handler.GetById).Methods("GET")
 }
 
-func (h *HttpOrganizationHandler) Fetch(w http.ResponseWriter, r *http.Request) error {
-	orgs, error := h.OrganizationUsecase.Fetch()
+func (h *HttpOrganizationHandler) Fetch(w http.ResponseWriter, r *http.Request) {
+	orgs, err := h.OrganizationUsecase.Fetch()
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
@@ -31,10 +30,10 @@ func (h *HttpOrganizationHandler) Fetch(w http.ResponseWriter, r *http.Request) 
 	respondWithJSON(w, http.StatusOK, orgs)
 }
 
-func (h *HttpOrganizationHandler) GetById(w http.ResponseWriter, r *http.Request) error {
+func (h *HttpOrganizationHandler) GetById(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id, err := vars["id"]
-	if err != nil {
+	id, ok := vars["id"]
+	if !ok {
 		respondWithError(w, http.StatusBadRequest, "Invalid organization ID")
 		return
 	}
@@ -46,7 +45,7 @@ func (h *HttpOrganizationHandler) GetById(w http.ResponseWriter, r *http.Request
 	respondWithJSON(w, http.StatusOK, org)
 }
 
-func (h *HttpOrganizationHandler) Store(w http.ResponseWriter, r *http.Request) error {
+func (h *HttpOrganizationHandler) Store(w http.ResponseWriter, r *http.Request) {
 
 }
 
