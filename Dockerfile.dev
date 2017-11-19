@@ -3,3 +3,5 @@ MAINTAINER Alexey Vakulich "soulSpringg@gmail.com"
 
 RUN apk add --update --no-cache git
 RUN go get github.com/gorilla/mux
+RUN go get github.com/lib/pq
+RUN go get github.com/spf13/viper

@@ -1,0 +1,13 @@
+{
+  "debug": true,
+  "server": {
+    "address": ":5432"
+  },
+  "database": {
+    "host": "localhost",
+    "port": "5432",
+    "user": "root",
+    "pass": "password",
+    "name": "interviewr"
+  }
+}
