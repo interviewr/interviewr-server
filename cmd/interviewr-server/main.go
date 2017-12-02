@@ -4,12 +4,8 @@ import (
 	"fmt"
 	"net/http"
 	"github.com/gorilla/mux"
-	// "os"
-	// "os/signal"
-	// "syscall"
 	"database/sql"
 	_ "github.com/lib/pq"
-
 	repo "github.com/interviewr/interviewr-server/repository/postgres"
 	usecases "github.com/interviewr/interviewr-server/usecases"
 	httpDeliver "github.com/interviewr/interviewr-server/transport/http"
@@ -40,27 +36,16 @@ func main() {
 	}
 	defer dbConnection.Close()
 
-	err = dbConnection.Ping()
-	if err != nil {
-		panic(err)
-	}
+	// err = dbConnection.Ping()
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
 
 	r := mux.NewRouter()
 
 	orgRepo := repo.NewOrganizationRepository(dbConnection)
 	orgUsecase := usecases.NewOrganizationUsecase(orgRepo)
 	httpDeliver.NewOrganizationHttpHandler(r, orgUsecase)
-
-	// errs := make(chan error)
-	// go func() {
-	// 	c := make(chan os.Signal)
-	// 	signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)
-	// 	errs <- fmt.Errorf("%s", <-c)
-	// }()
-
-	// go func() {
-	// 	errs <- http.ListenAndServe(*httpAddr, r)
-	// }()
 
 	http.ListenAndServe(config.GetString("server.address"), r)
 }
