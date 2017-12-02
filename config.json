@@ -1,10 +1,10 @@
 {
   "debug": true,
   "server": {
-    "address": ":5432"
+    "address": ":8090"
   },
   "database": {
-    "host": "localhost",
+    "host": "db",
     "port": "5432",
     "user": "root",
     "pass": "password",

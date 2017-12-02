@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"net/http"
 	"github.com/gorilla/mux"
@@ -46,12 +45,6 @@ func main() {
 		panic(err)
 	}
 
-	var (
-		httpAddr = flag.String("http.addr", ":8090", "HTTP listen address")
-	)
-
-	flag.Parse()
-
 	r := mux.NewRouter()
 
 	orgRepo := repo.NewOrganizationRepository(dbConnection)
@@ -69,5 +62,5 @@ func main() {
 	// 	errs <- http.ListenAndServe(*httpAddr, r)
 	// }()
 
-	http.ListenAndServe(*httpAddr, r)
+	http.ListenAndServe(config.GetString("server.address"), r)
 }
