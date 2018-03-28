@@ -1,5 +1,4 @@
-# interviewr-server [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)]( https://github.com/interviewr/interviewr-server/blob/develop/LICENSE) [![Build Status](https://travis-ci.org/interviewr/interviewr-server.svg?branch=develop)](https://travis-ci.org/interviewr/interviewr-server)
-[![GitHub contributors](https://img.shields.io/github/contributors/cdnjs/cdnjs.svg?style=flat-square)](https://github.com/interviewr/interviewr-server/graphs/contributors)
+# interviewr-server [![Build Status](https://travis-ci.org/interviewr/interviewr-server.svg?branch=develop&style=flat-square)](https://travis-ci.org/interviewr/interviewr-server) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)]( https://github.com/interviewr/interviewr-server/blob/develop/LICENSE) [![GitHub issues](https://img.shields.io/github/issues/interviewr/interviewr-server.svg?style=flat-square)](https://github.com/interviewr/interviewr-server/issues) [![GitHub contributors](https://img.shields.io/github/contributors/interviewr/interviewr-server.svg?style=flat-square)](https://github.com/interviewr/interviewr-server/graphs/contributors)
 
 Interviewr backend service. It's part of [interviewr-docker](https://github.com/interviewr/interviewr-docker).
 
