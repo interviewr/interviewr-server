@@ -1,0 +1,23 @@
+sudo: false
+
+language: go
+
+go_import_path: interviewr-server
+
+services:
+  - docker
+
+go:
+  - "1.10.x"
+
+script:
+  - set -e
+  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+  - dep ensure
+  - make build
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  - make image-build image-publish IMAGE_VERSION=$TRAVIS_BRANCH
+
+branches:
+  only:
+    - develop
