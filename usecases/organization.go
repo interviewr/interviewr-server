@@ -1,8 +1,8 @@
 package usecases
 
 import (
-	"github.com/interviewr/interviewr-server/domain"
-	"github.com/interviewr/interviewr-server/repository"
+	"interviewr-server/domain"
+	"interviewr-server/repository"
 )
 
 type OrganizationUsecase interface {

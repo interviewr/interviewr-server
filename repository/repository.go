@@ -2,7 +2,7 @@ package repository
 
 import (
 	"errors"
-	domain "github.com/interviewr/interviewr-server/domain"
+	domain "interviewr-server/domain"
 )
 
 type OrganizationRepository interface {
