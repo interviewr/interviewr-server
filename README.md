@@ -32,25 +32,21 @@ Build service:
 ```sh
 make build
 ```
-Clean artifacts under `bin/` folder:
-```sh
-make clean
-```
 Update service dependencies:
 ```sh
 make dep
 ```
 Build docker image:
 ```sh
-make docker-image-build
+make image-build
 ```
 Run docker container:
 ```sh
-make docker-image-test
+make image-run
 ```
 Publish docker image to DockerHub registry:
 ```sh
-make docker-image-publish
+make image-publish
 ```
 
 ## Docker image

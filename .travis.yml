@@ -1,0 +1,20 @@
+sudo: false
+
+language: go
+
+services:
+  - docker
+
+go:
+  - "1.10.x"
+
+script:
+  - dep ensure
+  - make build
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  - make image-build image-publish DOCKER_IMAGE_VERSION=$TRAVIS_BRANCH
+
+branches:
+  only:
+    - develop
+    - /^feature\/.*$/
