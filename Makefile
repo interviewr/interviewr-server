@@ -9,12 +9,9 @@ TARGETS = bin/entry
 default: build
 .PHONY: default
 
-build: $(TARGETS)
-.PHONY: build
-
-bin/entry:
-	@ echo "---> Building $@ binary ..."
-	@ env GOOS=linux GOARCH=386 go build -o $(WORKDIR)/$@ ./cmd/$(MODULE_NAME)
+build:
+	@ echo "---> Building $(TARGETS) binary ..."
+	@ env GOOS=linux GOARCH=386 go build -o $(WORKDIR)/$(TARGETS) ./cmd/$(MODULE_NAME)
 
 clean:
 	@ echo "---> Cleaning up build artifacts ..."
