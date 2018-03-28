@@ -1,4 +1,6 @@
-# interviewr-server
+# interviewr-server [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)]( https://github.com/interviewr/interviewr-server/blob/develop/LICENSE) [![Build Status](https://travis-ci.org/interviewr/interviewr-server.svg?branch=develop)](https://travis-ci.org/interviewr/interviewr-server)
+[![GitHub contributors](https://img.shields.io/github/contributors/cdnjs/cdnjs.svg?style=flat-square)](https://github.com/interviewr/interviewr-server/graphs/contributors)
+
 Interviewr backend service. It's part of [interviewr-docker](https://github.com/interviewr/interviewr-docker).
 
 ## Prerequisites
