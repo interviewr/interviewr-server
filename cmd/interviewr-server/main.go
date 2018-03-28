@@ -6,10 +6,10 @@ import (
 	"github.com/gorilla/mux"
 	"database/sql"
 	_ "github.com/lib/pq"
-	repo "github.com/interviewr/interviewr-server/repository/postgres"
-	usecases "github.com/interviewr/interviewr-server/usecases"
-	httpDeliver "github.com/interviewr/interviewr-server/transport/http"
-	cfg "github.com/interviewr/interviewr-server/config/env"
+	repo "interviewr-server/repository/postgres"
+	usecases "interviewr-server/usecases"
+	httpDeliver "interviewr-server/transport/http"
+	cfg "interviewr-server/config/env"
 )
 
 var config cfg.Config

@@ -1,17 +1,13 @@
-FROM golang:alpine
-MAINTAINER Alexey Vakulich "soulSpringg@gmail.com"
-
-# no need to redefine $GOPATH
-ENV SRC_DIR=/go/src/github.com/interviewr/interviewr-server
-
-ADD . $SRC_DIR
-WORKDIR $SRC_DIR
-
-RUN apk add --update --no-cache git
-RUN mkdir -p /bin
-RUN go get ./cmd/interviewr-server
-RUN go build -o ./bin/entry ./cmd/interviewr-server
-
-CMD ["./bin/entry"]
+FROM alpine:3.7
 
 EXPOSE 8090
+
+RUN apk add --update --no-cache git
+RUN mkdir -p /app /app/bin/
+
+WORKDIR /app
+
+COPY ./bin/entry /app/bin/
+COPY config.json /app/
+
+CMD ["./bin/entry"]

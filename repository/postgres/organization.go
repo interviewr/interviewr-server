@@ -3,8 +3,8 @@ package postgres
 import (
 	"database/sql"
 	_ "github.com/lib/pq"
-	domain "github.com/interviewr/interviewr-server/domain"
-	"github.com/interviewr/interviewr-server/repository"
+	domain "interviewr-server/domain"
+	"interviewr-server/repository"
 )
 
 type organizationRepository struct {

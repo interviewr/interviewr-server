@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"github.com/gorilla/mux"
-	"github.com/interviewr/interviewr-server/usecases"
+	"interviewr-server/usecases"
 )
 
 type HttpOrganizationHandler struct {
