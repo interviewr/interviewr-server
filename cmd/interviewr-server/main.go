@@ -47,5 +47,5 @@ func main() {
 	orgUsecase := usecases.NewOrganizationUsecase(orgRepo)
 	httpDeliver.NewOrganizationHttpHandler(r, orgUsecase)
 
-	http.ListenAndServe(config.GetString("server.address"), r)
+	http.ListenAndServe(config.GetString("address"), r)
 }
