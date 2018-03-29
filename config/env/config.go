@@ -21,7 +21,7 @@ func NewViperConfig() Config {
 }
 
 func (v *viperConfig) Init() {
-	viper.SetEnvPrefix(`interviewr-server`)
+	viper.SetEnvPrefix(`interviewr_server`)
 	viper.AutomaticEnv()
 
 	replacer := strings.NewReplacer(`.`, `_`)

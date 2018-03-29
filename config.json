@@ -1,8 +1,6 @@
 {
   "debug": true,
-  "server": {
-    "address": ":8090"
-  },
+  "address": ":8090",
   "database": {
     "host": "db",
     "port": "5432",

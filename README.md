@@ -25,8 +25,14 @@ $ ./bin/entry
 ```
 
 ## Development
-### Service configuration
-You can configure service by editing `config.json` located at the root of project.
+
+### Configuration
+You can configure service by editing `config.json` located at the root of project. Also variables from `config.json` can be configured via environment variables prefixed with `INTERVIEWR_SERVER_`. For example:
+```sh
+INTERVIEWR_SERVER_DEBUG=false
+INTERVIEWR_SERVER_ADDRESS=:8090
+INTERVIEWR_SERVER_DATABASE_HOST=db
+```
 
 ### Available commands
 Build service:
