@@ -8,6 +8,12 @@
   version = "v1.4.7"
 
 [[projects]]
+  name = "github.com/go-gorp/gorp"
+  packages = ["."]
+  revision = "4df78490a9aa9a78b9b02b0c913df8dc1954faee"
+  version = "2.1"
+
+[[projects]]
   name = "github.com/gorilla/context"
   packages = ["."]
   revision = "1ea25387ff6f684839d82767c1733ff4d4d15d0a"
@@ -124,6 +130,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "0d2390907455f052a2c16990f1830cbbee02693a7daa0bc90a8ec9cb95ae90f8"
+  inputs-digest = "bc9504158160ec32c58d42c4574df4f33430f9332f1f9317df9346ba71953570"
   solver-name = "gps-cdcl"
   solver-version = 1

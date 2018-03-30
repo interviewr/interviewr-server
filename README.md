@@ -56,6 +56,14 @@ Publish docker image to DockerHub registry:
 make image-publish
 ```
 
+### Database
+For running service you should have running instance of postgres.
+If you have Docker:
+```sh
+$ docker pull postgres
+$ make postgres-run
+```
+
 ## Docker image
 Also you can grab prepared docker image from DockerHub
 ```sh

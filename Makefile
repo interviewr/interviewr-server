@@ -34,3 +34,7 @@ image-run:
 	@ echo "---> Running Docker container ..."
 	@ docker run -it -p 8090:8090 -d --rm --name $(MODULE_NAME) $(MODULE_NAME):$(IMAGE_VERSION)
 .PHONY: image-test
+
+postgres-run:
+	@ docker run -it --rm --name postgres -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=password -e POSTGRES_DB=interviewr -d postgres
+.PHONY: postgres-run
