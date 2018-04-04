@@ -14,38 +14,40 @@ type OrganizationUsecase interface {
 }
 
 type organizationUsecase struct {
-	orgRepository repository.OrganizationRepository
+	repository repository.OrganizationRepository
 }
 
-func NewOrganizationUsecase(repo repository.OrganizationRepository) OrganizationUsecase {
-	return &organizationUsecase{repo}
+func NewOrganizationUsecase(repo repository.OrganizationRepository) *organizationUsecase {
+	return &organizationUsecase{repository: repo}
 }
 
-func (uc *organizationUsecase) Fetch() ([]*domain.Organization, error) {
-	orgs, err := uc.orgRepository.Fetch()
+func (interactor *organizationUsecase) Fetch() ([]*domain.Organization, error) {
+	orgs, err := interactor.repository.Fetch()
 	if err != nil {
 		return nil, err
 	}
+
 	return orgs, nil
 }
 
-func (uc *organizationUsecase) GetById(id string) (*domain.Organization, error) {
-	org, err := uc.orgRepository.GetById(id)
+func (interactor *organizationUsecase) GetById(id string) (*domain.Organization, error) {
+	org, err := interactor.repository.GetById(id)
 	if err != nil {
 		return nil, err
 	}
+
 	return org, nil
 }
 
-func (uc *organizationUsecase) Update(org *domain.Organization) (*domain.Organization, error) {
+func (interactor *organizationUsecase) Update(org *domain.Organization) (*domain.Organization, error) {
 	return nil, nil
 }
 
-func (uc *organizationUsecase) Store(org *domain.Organization) (string, error) {
-	return "nil", nil
+func (interactor *organizationUsecase) Store(org *domain.Organization) (string, error) {
+	return "empty", nil
 }
 
-func (uc *organizationUsecase) Delete(id string) (bool, error) {
+func (interactor *organizationUsecase) Delete(id string) (bool, error) {
 	// Validation logic here (check if item by given id exists)
-	return uc.orgRepository.Delete(id)
+	return interactor.repository.Delete(id)
 }
