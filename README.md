@@ -3,8 +3,9 @@
 Interviewr backend service. It's part of [interviewr-docker](https://github.com/interviewr/interviewr-docker).
 
 ## Prerequisites
+* [go-bindata](https://github.com/shuLhan/go-bindata) - Converts any file into managable Go source code;
 * [dep](https://golang.github.io/dep/) - Dependency management tool for Go;
-* [PostgreSQL](https://www.postgresql.org/)
+* [PostgreSQL](https://www.postgresql.org/).
 
 ## Running
 1. Clone this repo
@@ -55,6 +56,22 @@ Publish docker image to DockerHub registry:
 ```sh
 make image-publish
 ```
+
+### Database
+For running service you should have running instance of postgres.
+If you have Docker:
+```sh
+$ docker pull postgres
+$ make postgres-run
+```
+After that create database with name `organization`.
+
+Also you can run `Adminer` - Database management tool
+```sh
+$ docker pull adminer
+$ make adminer-run
+```
+Adminer will be available at `http://localhost:8080`. You can reach `postgres` server using `db` name as `server` field.
 
 ## Docker image
 Also you can grab prepared docker image from DockerHub

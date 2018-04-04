@@ -2,14 +2,13 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-	"github.com/gorilla/mux"
-	"database/sql"
-	_ "github.com/lib/pq"
-	repo "interviewr-server/repository/postgres"
-	usecases "interviewr-server/usecases"
-	httpDeliver "interviewr-server/transport/http"
 	cfg "interviewr-server/config/env"
+	"interviewr-server/repository"
+	httpDeliver "interviewr-server/transport/http"
+	"interviewr-server/usecases"
+	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 var config cfg.Config
@@ -28,22 +27,18 @@ func main() {
 	dbUser := config.GetString("database.user")
 	dbPass := config.GetString("database.pass")
 	dbName := config.GetString("database.name")
-	connectionStr := fmt.Sprintf("user=%s password=%s host=%s port=%s dbname=%s sslmode=disable", dbUser, dbPass, dbHost, dbPort, dbName)
+	dsn := fmt.Sprintf("user=%s password=%s host=%s port=%s dbname=%s sslmode=disable", dbUser, dbPass, dbHost, dbPort, dbName)
 
-	dbConnection, err := sql.Open("postgres", connectionStr)
+	dbmap, err := repository.InitStorage("postgres", dsn)
+	defer repository.DropAndClose(dbmap)
+
 	if err != nil && config.GetBool("debug") {
 		fmt.Println(err)
 	}
-	defer dbConnection.Close()
-
-	// err = dbConnection.Ping()
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
 
 	r := mux.NewRouter()
 
-	orgRepo := repo.NewOrganizationRepository(dbConnection)
+	orgRepo := repository.NewOrganizationRepository(dbmap)
 	orgUsecase := usecases.NewOrganizationUsecase(orgRepo)
 	httpDeliver.NewOrganizationHttpHandler(r, orgUsecase)
 

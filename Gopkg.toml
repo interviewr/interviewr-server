@@ -40,3 +40,11 @@
 [prune]
   go-tests = true
   unused-packages = true
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/rubenv/sql-migrate"
+
+[[constraint]]
+  name = "gopkg.in/gorp.v1"
+  version = "1.7.1"
