@@ -13,6 +13,7 @@ go:
 script:
   - set -e
   - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+  - go get -u github.com/shuLhan/go-bindata/...
   - dep ensure
   - make build
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
@@ -21,3 +22,4 @@ script:
 branches:
   only:
     - develop
+    - feature/add-orm

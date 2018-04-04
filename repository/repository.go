@@ -3,37 +3,30 @@ package repository
 import (
 	"database/sql"
 	"errors"
-	"interviewr-server/domain"
+	"fmt"
 
-	"github.com/go-gorp/gorp"
 	_ "github.com/lib/pq"
+	migrate "github.com/rubenv/sql-migrate"
+	gorp "gopkg.in/gorp.v1"
 )
 
-func InitStorage(storage string, dsn string) *gorp.DbMap {
+func InitStorage(storage string, dsn string) (*gorp.DbMap, error) {
 	dbmap := createStorage(storage, dsn)
-	table := dbmap.AddTableWithName(domain.Organization{}, "organization").SetKeys(true, "ID")
-	table.ColMap("ID").Rename("id")
-	table.ColMap("Name").Rename("name")
-	table.ColMap("Email").Rename("email")
-	table.ColMap("Description").Rename("description")
-	table.ColMap("Location").Rename("location")
 
-	err := dbmap.DropTablesIfExists()
-	if err != nil {
-		panic(err)
+	migrations := &migrate.AssetMigrationSource{
+		Asset:    Asset,
+		AssetDir: AssetDir,
+		Dir:      "migrations",
 	}
 
-	err = dbmap.CreateTables()
+	// TODO: do not hardcore driver name!
+	n, err := migrate.Exec(dbmap.Db, "postgres", migrations, migrate.Up)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
+	fmt.Printf("Applied %d migrations!\n", n)
 
-	err = dbmap.CreateIndex()
-	if err != nil {
-		panic(err)
-	}
-
-	return dbmap
+	return dbmap, nil
 }
 
 func createStorage(storage string, dsn string) *gorp.DbMap {
@@ -66,7 +59,6 @@ func dialectAndDriver(storage string) (gorp.Dialect, string) {
 }
 
 func DropAndClose(dbmap *gorp.DbMap) {
-	dbmap.DropTablesIfExists()
 	dbmap.Db.Close()
 }
 

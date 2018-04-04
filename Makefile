@@ -13,7 +13,9 @@ default: build
 build:
 	@ echo "---> Building $(TARGETS) binary ..."
 	@ rm -f $(TARGETS)
+	@ go-bindata -pkg repository -o repository/migrations.go migrations/...
 	@ env GOOS=linux GOARCH=386 go build -o $(WORKDIR)/$(TARGETS) ./cmd/$(MODULE_NAME)
+	# @ go build -o $(WORKDIR)/$(TARGETS) ./cmd/$(MODULE_NAME)
 
 dep:
 	@ echo "---> Updating dependencies ..."
@@ -36,5 +38,11 @@ image-run:
 .PHONY: image-test
 
 postgres-run:
+	@ echo "---> Running Postgres DB container ..."
 	@ docker run -it --rm --name postgres -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=password -e POSTGRES_DB=interviewr -d postgres
 .PHONY: postgres-run
+
+adminer-run:
+	@ echo "---> Running Adminer container ..."
+	@ docker run -it --rm --link postgres:db --name adminer -p 8080:8080 -d adminer
+.PHONY: adminer-run

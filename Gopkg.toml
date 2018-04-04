@@ -42,5 +42,9 @@
   unused-packages = true
 
 [[constraint]]
-  name = "github.com/go-gorp/gorp"
-  version = "2.1.0"
+  branch = "master"
+  name = "github.com/rubenv/sql-migrate"
+
+[[constraint]]
+  name = "gopkg.in/gorp.v1"
+  version = "1.7.1"

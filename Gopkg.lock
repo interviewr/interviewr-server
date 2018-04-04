@@ -8,12 +8,6 @@
   version = "v1.4.7"
 
 [[projects]]
-  name = "github.com/go-gorp/gorp"
-  packages = ["."]
-  revision = "4df78490a9aa9a78b9b02b0c913df8dc1954faee"
-  version = "2.1"
-
-[[projects]]
   name = "github.com/gorilla/context"
   packages = ["."]
   revision = "1ea25387ff6f684839d82767c1733ff4d4d15d0a"
@@ -70,13 +64,22 @@
   version = "v1.1.0"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/rubenv/sql-migrate"
+  packages = [
+    ".",
+    "sqlparse"
+  ]
+  revision = "081fe17d19ff4e2dd9f5a0c1158e6bcf74da6906"
+
+[[projects]]
   name = "github.com/spf13/afero"
   packages = [
     ".",
     "mem"
   ]
-  revision = "bb8f1927f2a9d3ab41c9340aa034f6b803f4359c"
-  version = "v1.0.2"
+  revision = "63644898a8da0bc22138abf860edaf5277b6102e"
+  version = "v1.1.0"
 
 [[projects]]
   name = "github.com/spf13/cast"
@@ -106,7 +109,7 @@
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
-  revision = "13d03a9a82fba647c21a0ef8fba44a795d0f0835"
+  revision = "378d26f46672a356c46195c28f61bdb4c0a781dd"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -122,14 +125,20 @@
   version = "v0.3.0"
 
 [[projects]]
+  name = "gopkg.in/gorp.v1"
+  packages = ["."]
+  revision = "c87af80f3cc5036b55b83d77171e156791085e2e"
+  version = "v1.7.1"
+
+[[projects]]
   name = "gopkg.in/yaml.v2"
   packages = ["."]
-  revision = "86f5ed62f8a0ee96bd888d2efdfd6d4fb100a4eb"
-  version = "v2.2.0"
+  revision = "5420a8b6744d3b0345ab293f6fcba19c978f1183"
+  version = "v2.2.1"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "bc9504158160ec32c58d42c4574df4f33430f9332f1f9317df9346ba71953570"
+  inputs-digest = "dbd0577f61b59701a33655adcff315059bc1692671c10931737acfc53f0e2c4a"
   solver-name = "gps-cdcl"
   solver-version = 1

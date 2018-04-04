@@ -29,12 +29,12 @@ func main() {
 	dbName := config.GetString("database.name")
 	dsn := fmt.Sprintf("user=%s password=%s host=%s port=%s dbname=%s sslmode=disable", dbUser, dbPass, dbHost, dbPort, dbName)
 
-	dbmap := repository.InitStorage("postgres", dsn)
+	dbmap, err := repository.InitStorage("postgres", dsn)
 	defer repository.DropAndClose(dbmap)
 
-	// if err != nil && config.GetBool("debug") {
-	// 	fmt.Println(err)
-	// }
+	if err != nil && config.GetBool("debug") {
+		fmt.Println(err)
+	}
 
 	r := mux.NewRouter()
 

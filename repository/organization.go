@@ -3,8 +3,8 @@ package repository
 import (
 	"interviewr-server/domain"
 
-	"github.com/go-gorp/gorp"
 	_ "github.com/lib/pq"
+	gorp "gopkg.in/gorp.v1"
 )
 
 type OrganizationRepository interface {
