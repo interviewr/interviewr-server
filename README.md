@@ -64,7 +64,7 @@ If you have Docker:
 $ docker pull postgres
 $ make postgres-run
 ```
-After that create database with name `organization`.
+After that create database with name `interviewr`.
 
 Also you can run `Adminer` - Database management tool
 ```sh
