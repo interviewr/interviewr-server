@@ -2,9 +2,10 @@ package http
 
 import (
 	"encoding/json"
-	"net/http"
-	"github.com/gorilla/mux"
 	"interviewr-server/usecases"
+	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 type HttpOrganizationHandler struct {
@@ -27,6 +28,7 @@ func (h *HttpOrganizationHandler) Fetch(w http.ResponseWriter, r *http.Request) 
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+
 	respondWithJSON(w, http.StatusOK, orgs)
 }
 
@@ -42,6 +44,7 @@ func (h *HttpOrganizationHandler) GetById(w http.ResponseWriter, r *http.Request
 	if err != nil {
 		respondWithError(w, http.StatusNotFound, "Organization not found")
 	}
+
 	respondWithJSON(w, http.StatusOK, org)
 }
 
