@@ -13,7 +13,7 @@ default: build
 build:
 	@ echo "---> Building $(TARGETS) binary ..."
 	@ rm -f $(TARGETS)
-	@ go-bindata -pkg repository -o repository/migrations.go migrations/...
+	@ go-bindata -pkg repository -o migrations/migrations.go migrations/...
 	@ env GOOS=linux GOARCH=386 go build -o $(WORKDIR)/$(TARGETS) ./cmd/$(MODULE_NAME)
 	# @ go build -o $(WORKDIR)/$(TARGETS) ./cmd/$(MODULE_NAME)
 
