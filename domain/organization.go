@@ -1,7 +1,11 @@
 package domain
 
-import "errors"
+import (
+	"errors"
+	"regexp"
+)
 
+// Organization entity
 type Organization struct {
 	ID          string `json:"id"`
 	Name        string `json:"name"`
@@ -10,18 +14,20 @@ type Organization struct {
 	Location    string `json:"location"`
 }
 
-func (r Organization) Validate() error {
-	if r.ID == "" {
+// Validate instance
+func (o Organization) Validate() error {
+	if o.ID == "" {
 		return errors.New("ID is empty")
 	}
 
-	if r.Name == "" {
+	if o.Name == "" {
 		return errors.New("Name is empty")
 	}
 
-	// TODO: add proper email validation
-	if r.Email == "" {
-		return errors.New("Email is empty")
+	Re := regexp.MustCompile(`^[a-z0-9._+\-]+@[a-z0-9.\-]+\.[a-z]{2,8}$`)
+
+	if !Re.MatchString(o.Email) {
+		return errors.New("Email is invalid")
 	}
 
 	return nil
