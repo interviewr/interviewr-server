@@ -8,7 +8,9 @@ import (
 	"interviewr-server/repository"
 	httpDeliver "interviewr-server/transport/http"
 	"interviewr-server/usecases"
+	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
@@ -27,6 +29,7 @@ func init() {
 }
 
 func main() {
+	debug := config.GetBool("debug")
 	dbHost := config.GetString("database.host")
 	dbPort := config.GetString("database.port")
 	dbUser := config.GetString("database.user")
@@ -40,6 +43,10 @@ func main() {
 	}
 
 	dbmap := &gorp.DbMap{Db: db, Dialect: gorp.PostgresDialect{}}
+	if debug {
+		dbmap.TraceOn("[GORP]", log.New(os.Stdout, "interviewr:", log.Lmicroseconds))
+	}
+
 	defer dbmap.Db.Close()
 
 	migrations := &migrate.AssetMigrationSource{
@@ -57,9 +64,20 @@ func main() {
 
 	r := mux.NewRouter()
 
+	// Organizations
 	orgRepo := repository.NewPostgresOrganizationRepository(dbmap)
 	orgUsecase := usecases.NewOrganizationUsecase(orgRepo)
 	httpDeliver.NewOrganizationHttpHandler(r, orgUsecase)
+
+	// Users
+	userRepo := repository.NewPostgresUserRepository(dbmap)
+	userUsecase := usecases.NewUserUsecase(userRepo)
+	httpDeliver.NewUserHttpHandler(r, userUsecase)
+
+	// Vacancies
+	vacancyRepo := repository.NewPostgresVacancyRepository(dbmap)
+	vacancyUsecase := usecases.NewVacancyUsecase(vacancyRepo)
+	httpDeliver.NewVacancyHttpHandler(r, vacancyUsecase)
 
 	http.ListenAndServe(config.GetString("address"), r)
 }
